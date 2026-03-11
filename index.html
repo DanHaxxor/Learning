@@ -115,45 +115,90 @@
       color: #718096;
       margin-top: 0.15rem;
     }
+
+    .welcome-text {
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #4a5568;
+      margin-bottom: 2rem;
+    }
+
+    .btn-next {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      background: #226DB4;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-next:hover {
+      background: #1a5a96;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="card">
-      <div class="logo">
-        <img src="zoho-logo.png" alt="Zoho" height="40" style="margin-bottom: 0.75rem;">
-        <h1>Discover Zoho</h1>
-        <p>Answer a few questions to find your ideal setup</p>
+      <!-- Welcome Panel -->
+      <div id="welcome-panel">
+        <div class="logo">
+          <img src="zoho-logo.png" alt="Zoho" height="40" style="margin-bottom: 0.75rem;">
+          <h1>Discover Zoho</h1>
+        </div>
+        <p class="welcome-text">
+          Hi, welcome to Zoho! I'd like to ask you a few questions about your business before we proceed to your Zoho One app recommendations.
+        </p>
+        <button class="btn-next" onclick="showQuestion()">Let's Get Started &rarr;</button>
       </div>
 
-      <div class="question">How many people will be using the software?</div>
-      <div class="options" id="options-container">
-        <div class="option" onclick="select(this)">
-          <div class="option-icon"></div>
-          <div>
-            <div class="option-text">Just me</div>
-            <div class="option-desc">Solo freelancer or entrepreneur</div>
-          </div>
+      <!-- Question Panel -->
+      <div id="question-panel" class="hidden">
+        <div class="logo">
+          <img src="zoho-logo.png" alt="Zoho" height="40" style="margin-bottom: 0.75rem;">
+          <h1>Discover Zoho</h1>
+          <p>Answer a few questions to find your ideal setup</p>
         </div>
-        <div class="option" onclick="select(this)">
-          <div class="option-icon"></div>
-          <div>
-            <div class="option-text">2-10 users</div>
-            <div class="option-desc">Small team or startup</div>
+
+        <div class="question">How many people will be using the software?</div>
+        <div class="options" id="options-container">
+          <div class="option" onclick="selectOption(this)">
+            <div class="option-icon"></div>
+            <div>
+              <div class="option-text">Just me</div>
+              <div class="option-desc">Solo freelancer or entrepreneur</div>
+            </div>
           </div>
-        </div>
-        <div class="option" onclick="select(this)">
-          <div class="option-icon"></div>
-          <div>
-            <div class="option-text">11-50 users</div>
-            <div class="option-desc">Growing company</div>
+          <div class="option" onclick="selectOption(this)">
+            <div class="option-icon"></div>
+            <div>
+              <div class="option-text">2-10 users</div>
+              <div class="option-desc">Small team or startup</div>
+            </div>
           </div>
-        </div>
-        <div class="option" onclick="select(this)">
-          <div class="option-icon"></div>
-          <div>
-            <div class="option-text">50+ users</div>
-            <div class="option-desc">Established organization</div>
+          <div class="option" onclick="selectOption(this)">
+            <div class="option-icon"></div>
+            <div>
+              <div class="option-text">11-50 users</div>
+              <div class="option-desc">Growing company</div>
+            </div>
+          </div>
+          <div class="option" onclick="selectOption(this)">
+            <div class="option-icon"></div>
+            <div>
+              <div class="option-text">50+ users</div>
+              <div class="option-desc">Established organization</div>
+            </div>
           </div>
         </div>
       </div>
@@ -161,7 +206,12 @@
   </div>
 
   <script>
-    function select(el) {
+    function showQuestion() {
+      document.getElementById('welcome-panel').classList.add('hidden');
+      document.getElementById('question-panel').classList.remove('hidden');
+    }
+
+    function selectOption(el) {
       document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
     }
